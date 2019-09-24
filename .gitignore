@@ -1,0 +1,9 @@
+.vs/
+.vscode/
+obj/
+bin/
+node_modules/
+appsettings.*.json
+*/wwwroot/assets/
+.cache/
+*/dist/

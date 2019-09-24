@@ -1,0 +1,39 @@
+﻿@inject AssetVersionFinder AssetVersionFinder
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Workouts</title>
+    <link type="text/css" rel="stylesheet" href="~/@AssetVersionFinder.GetVersionedAsset("main.css")" />
+</head>
+<body>
+    <nav class="navbar is-link" role="navigation" aria-label="main navigation">
+        <div class="navbar-brand">
+            <a asp-action="Index" asp-controller="Home" class="navbar-item">Workout DB</a>
+            <a class="navbar-burger burger" role="button" aria-label="menu" aria-expanded="false" data-target="main-menu">
+                <span aria-hidden="true"></span>
+                <span aria-hidden="true"></span>
+                <span aria-hidden="true"></span>
+            </a>
+        </div>
+        <div id="main-menu" class="navbar-menu">
+            <div class="navbar-start">
+                <a class="navbar-item" asp-action="Index" asp-controller="Workout">Workouts</a>
+            </div>
+            <div class="navbar-end">
+                <form asp-action="SignOut" asp-controller="Home" method="post">
+                    <div class="navbar-item">
+                        <input class="button is-light" type="submit" value="Sign Out" />
+                    </div>
+                </form>
+            </div>
+        </div>
+    </nav>
+    <div class="container">
+        @RenderBody()
+    </div>
+    <script src="~/@AssetVersionFinder.GetVersionedAsset("main.js")"></script>
+    @RenderSection("Scripts", required: false)
+</body>
+</html>
