@@ -21,7 +21,8 @@ namespace Workout3.Web.Controllers
         [HttpGet]
         public async Task<IActionResult> Index()
         {
-            return View();
+            var workouts = await _workoutService.Find();
+            return View(workouts);
         }
     }
 }

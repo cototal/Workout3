@@ -23,6 +23,13 @@ namespace Workout3.Web.Services
             _workouts = database.GetCollection<Workout>("workouts");
         }
 
+        public async Task<List<Workout>> Find()
+        {
+            var workouts = await _workouts.Find(n => true).ToListAsync();
+            return workouts;
+        }
+
+
         public async Task<Workout> FindOne(string id)
         {
             var workout = await _workouts.Find(n => n.Id == id).FirstOrDefaultAsync();
