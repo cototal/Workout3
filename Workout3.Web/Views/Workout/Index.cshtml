@@ -1,10 +1,14 @@
 @model List<Workout>
 
+@{
+    ViewData["Title"] = "Index";
+}
+
 <div class="columns">
     <div class="column">
         <h2>Add Workout</h2>
-        <a href="" class="button is-link">Gym</a>
-        <a href="" class="button is-info">Home</a>
+        <a asp-action="Create" asp-route-location="Gym" class="button is-link">Gym</a>
+        <a asp-action="Create" asp-route-location="Home" class="button is-info">Home</a>
     </div>
     <div class="column">
         <h1>Workouts</h1>

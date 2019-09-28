@@ -1,1 +1,50 @@
-﻿<h1>New Workout</h1>
+﻿@model Workout
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<form asp-action="Create">
+    <h1 class="title">New Workout</h1>
+    <div class="columns">
+        <div class="column is-three-quarters">
+            <h2 class="title">Exercises</h2>
+            <div id="exercise-list">
+
+            </div>
+            <button id="add-exercise" class="button is-primary">Add Exercise</button>
+        </div>
+        <div class="column">
+            <h2 class="title">Info</h2>
+            <div class="field">
+                <label asp-for="Location" class="label">Location</label>
+                <div class="control">
+                    <input asp-for="Location" class="input" />
+                </div>
+            </div>
+            <div class="field">
+                <label class="label" asp-for="Name">Name</label>
+                <div class="control">
+                    <input asp-for="Name" class="input" />
+                </div>
+            </div>
+            <div class="field">
+                <label class="label" asp-for="StartTime">Start</label>
+                <div class="control">
+                    <input asp-for="StartTime" class="input" />
+                </div>
+            </div>
+            <div class="field">
+                <label class="label" asp-for="EndTime">End</label>
+                <div class="control">
+                    <input asp-for="EndTime" class="input" />
+                </div>
+            </div>
+            <div class="field">
+                <div class="control">
+                    <input type="submit" value="Save" class="button is-success" />
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
