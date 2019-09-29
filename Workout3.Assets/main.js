@@ -1,20 +1,37 @@
 import "./styles.scss";
 import $ from "cash-dom";
+import * as helpers from "./views/templateHelpers";
 
-function padString(string, padding = 2) {
-    let output = "0";
-    for (let idx = 0; idx < padding; idx++) {
-        output = output + "0";
-    }
-    output = output + string;
-    return output.slice(-padding);
-}
-
-function formatDateForInput(date) {
-    // Format mm/dd/yyyy HH:mm am/pm
-    const dateString = [date.getFullYear(), padString(date.getMonth() + 1), date.getDate()].join("-");
-    const timeString = [date.getHours(), padString(date.getMinutes())].join(":");
-    return [dateString, timeString].join("T");
+function exerciseTemplate(exerciseCount) {
+    const positionId = helpers.nestedListId("exercises", exerciseCount, "position");
+    const positionField = helpers.fieldDiv(helpers.labelTag("Position", positionId) + helpers.inputTag({
+        id: positionId,
+        type: "number",
+        name: `Exercises[${exerciseCount}].Position`,
+        value: exerciseCount
+    }));
+    const nameId = helpers.nestedListId("exercises", exerciseCount, "name");
+    const nameField = helpers.fieldDiv(helpers.labelTag("Name", nameId) + helpers.inputTag({
+        id: nameId,
+        name: helpers.nestedListName("Exercises", exerciseCount, "Name")
+    }));
+    const startId = helpers.nestedListId("exercises", exerciseCount, "start");
+    const startField = helpers.fieldDiv(helpers.labelTag("Start", startId) + helpers.dateInput({
+        id: startId,
+        name: helpers.nestedListName("Exercises", exerciseCount, "StartTime"),
+        date: new Date()
+    }));
+    const endId = helpers.nestedListId("exercises", exerciseCount, "end");
+    const endField = helpers.fieldDiv(helpers.labelTag("End", endId) + helpers.dateInput({
+        id: endId,
+        name: helpers.nestedListName("Exercises", exerciseCount, "EndTime"),
+        date: new Date()
+    }));
+    const posAndName = helpers.columnsDiv(helpers.columnDiv(positionField) + helpers.columnDiv(nameField));
+    const timeFields = helpers.columnsDiv(helpers.columnDiv(startField) + helpers.columnDiv(endField));
+    const batchDiv = helpers.div("", helpers.nestedListId("exercises", exerciseCount, "batches"), ["batches"]);
+    const addBatchButton = `<button data-exercise-id="${exerciseCount}" class="add-batch button is-warning">Add Batch</button>`;
+    return helpers.div(posAndName + timeFields + addBatchButton + batchDiv, null, ["exercise"]);
 }
 
 const $listContainer = $("#exercise-list");
@@ -22,48 +39,7 @@ if ($listContainer.length) {
     let exerciseCount = 0;
     $("#add-exercise").on("click", evt => {
         evt.preventDefault();
-        const date = formatDateForInput(new Date());
-
-        $listContainer.append(`<div class="exercise">
-            <div class="columns">
-                <div class="column">
-                    <div class="field">
-                        <label class="label">Position</label>
-                        <div class="control">
-                            <input class="input" type="number"
-                                name="Exercises[${exerciseCount}].Position" value="${exerciseCount}">
-                        </div>
-                    </div>
-                </div>
-                <div class="column is-three-quarters">
-                    <div class="field">
-                        <label class="label">Name</label>
-                        <div class="control">
-                            <input class="input" type="text"
-                                name="Exercises[${exerciseCount}].Name" value="">
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="columns">
-                <div class="column">
-                    <div class="field">
-                        <label class="label">Start</label>
-                        <div class="control">
-                            <input class="input" type="datetime-local" name="Exercises[${exerciseCount}].StartTime" value="${date}">
-                        </div>
-                    </div>
-                </div>
-                <div class="column">
-                    <div class="field">
-                        <label class="label">End</label>
-                        <div class="control">
-                            <input class="input" type="datetime-local" name="Exercises[${exerciseCount}].EndTime" value="${date}">
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>`);
+        $listContainer.append(exerciseTemplate(exerciseCount));
         ++exerciseCount;
     });
 }

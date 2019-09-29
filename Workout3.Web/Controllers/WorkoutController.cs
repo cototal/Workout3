@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Workout3.Web.Models;
+using Newtonsoft.Json;
 
 namespace Workout3.Web.Controllers
 {
@@ -38,7 +39,8 @@ namespace Workout3.Web.Controllers
         [HttpPost]
         public async Task<IActionResult> Create(Workout workout)
         {
-            return Ok();
+            var json = JsonConvert.SerializeObject(workout);
+            return Ok(json);
         }
     }
 }
