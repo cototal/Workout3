@@ -29,6 +29,15 @@ namespace Workout3.Web.Services
             return workouts;
         }
 
+        public async Task<List<Workout>> Recent(int limit = 5)
+        {
+            var workouts = await _workouts.Find(e => true)
+                .SortByDescending(e => e.StartTime)
+                .Limit(limit)
+                .ToListAsync();
+            return workouts;
+        }
+
 
         public async Task<Workout> FindOne(string id)
         {

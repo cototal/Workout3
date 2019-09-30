@@ -23,7 +23,7 @@ namespace Workout3.Web.Controllers
         [HttpGet]
         public async Task<IActionResult> Index()
         {
-            var workouts = await _workoutService.Find();
+            var workouts = await _workoutService.Recent();
             return View(workouts);
         }
 
@@ -39,8 +39,12 @@ namespace Workout3.Web.Controllers
         [HttpPost]
         public async Task<IActionResult> Create(Workout workout)
         {
-            var json = JsonConvert.SerializeObject(workout);
-            return Ok(json);
+            if (ModelState.IsValid)
+            {
+                await _workoutService.Create(workout);
+                return RedirectToAction("Index");
+            }
+            return View(workout);
         }
     }
 }

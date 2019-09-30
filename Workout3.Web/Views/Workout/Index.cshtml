@@ -6,26 +6,61 @@
 
 <div class="columns">
     <div class="column">
-        <h2>Add Workout</h2>
+        <h2 class="title">Add Workout</h2>
         <a asp-action="Create" asp-route-location="Gym" class="button is-link">Gym</a>
         <a asp-action="Create" asp-route-location="Home" class="button is-info">Home</a>
     </div>
-    <div class="column">
-        <h1>Workouts</h1>
+    <div class="column is-three-quarters">
+        <h2 class="title">Recent Workouts</h2>
         <table class="table is-striped">
             <thead>
                 <tr>
                     <th>Name</th>
                     <th>Location</th>
+                    <th>Start Time</th>
+                    <th>End Time</th>
+                    <th>Exercises</th>
                 </tr>
             </thead>
             <tbody>
                 @foreach (var workout in Model)
                 {
-                    <tr>
-                        <td>@workout.Name</td>
-                        <td>@workout.Location</td>
-                    </tr>
+                <tr>
+                    <td>@workout.Name</td>
+                    <td>@workout.Location</td>
+                    <td>
+                        @if (workout.StartTime != null)
+                        {
+                            @workout.StartTime.Value.ToString("yyyy-MM-dd HH:mm")
+                        }
+                    </td>
+                    <td>
+                        @if (workout.EndTime != null)
+                        {
+                            @workout.EndTime.Value.ToString("yyyy-MM-dd HH:mm")
+                        }
+                    </td>
+                    <td>
+                        <table class="table">
+                            <tbody>
+                                @foreach (var exercise in workout.Exercises.OrderBy(e => e.Position))
+                                {
+                                    <tr>
+                                        <td>@exercise.Name</td>
+                                        <td>
+                                            <ul>
+                                                @foreach (var batch in exercise.Batches.OrderBy(b => b.Position))
+                                                {
+                                                    <li>@batch.Reps / <b>@batch.Weight</b> lbs</li>
+                                                }
+                                            </ul>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </td>
+                </tr>
                 }
             </tbody>
         </table>

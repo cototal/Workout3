@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Workout3.Web.Models
+﻿namespace Workout3.Web.Models
 {
     public class Batch
     {

@@ -2,6 +2,7 @@
 
 @{
     ViewData["Title"] = "Create";
+    var timeString = DateTime.Now.ToString("yyyy-MM-ddTHH:mm");
 }
 
 <form asp-action="Create">
@@ -31,13 +32,13 @@
             <div class="field">
                 <label class="label" asp-for="StartTime">Start</label>
                 <div class="control">
-                    <input asp-for="StartTime" class="input" />
+                    <input asp-for="StartTime" class="input" value="@timeString" />
                 </div>
             </div>
             <div class="field">
                 <label class="label" asp-for="EndTime">End</label>
                 <div class="control">
-                    <input asp-for="EndTime" class="input" />
+                    <input asp-for="EndTime" class="input" value="@timeString" />
                 </div>
             </div>
             <div class="field">
