@@ -19,15 +19,14 @@ export function exerciseForm(exerciseCount) {
         name: helpers.nestedListName("Exercises", exerciseCount, "StartTime"),
         date: new Date()
     }));
-    const endId = helpers.nestedListId("exercises", exerciseCount, "end");
-    const endField = helpers.fieldDiv(helpers.labelTag("End", endId) + helpers.dateInput({
-        id: endId,
-        name: helpers.nestedListName("Exercises", exerciseCount, "EndTime"),
-        date: new Date()
-    }));
-    const posAndName = helpers.columnsDiv(helpers.columnDiv(positionField) + helpers.columnDiv(nameField));
-    const timeFields = helpers.columnsDiv(helpers.columnDiv(startField) + helpers.columnDiv(endField));
-    const batchDiv = helpers.div("", helpers.nestedListId("exercises", exerciseCount, "batches"), ["batches"]);
+    const fields = helpers.columnsDiv(
+        helpers.columnDiv(positionField, null, ["is-one-fifth"])
+        + helpers.columnDiv(nameField, null, ["is-two-fifths"])
+        + helpers.columnDiv(startField, null, ["is-two-fifths"]),
+        null, ["is-mobile"]);
+    const batchDiv = helpers.div(`<h4 class="subtitle">
+        Sets
+    </h2>`, helpers.nestedListId("exercises", exerciseCount, "batches"), ["batches"]);
     const addBatchButton = `<button data-exercise-id="${exerciseCount}" class="add-batch button is-warning">Add Batch</button>`;
-    return helpers.div(posAndName + timeFields + batchDiv + addBatchButton, null, ["exercise"]);
+    return helpers.div(fields + batchDiv + addBatchButton, null, ["exercise"]);
 }

@@ -15,18 +15,17 @@
         <table class="table is-striped">
             <thead>
                 <tr>
-                    <th>Name</th>
                     <th>Location</th>
                     <th>Start Time</th>
                     <th>End Time</th>
                     <th>Exercises</th>
+                    <th>Notes</th>
                 </tr>
             </thead>
             <tbody>
                 @foreach (var workout in Model)
                 {
                 <tr>
-                    <td>@workout.Name</td>
                     <td>@workout.Location</td>
                     <td>
                         @if (workout.StartTime != null)
@@ -60,6 +59,7 @@
                             </tbody>
                         </table>
                     </td>
+                    <td>@workout.Notes</td>
                 </tr>
                 }
             </tbody>

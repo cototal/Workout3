@@ -24,12 +24,6 @@
                 </div>
             </div>
             <div class="field">
-                <label class="label" asp-for="Name">Name</label>
-                <div class="control">
-                    <input asp-for="Name" class="input" />
-                </div>
-            </div>
-            <div class="field">
                 <label class="label" asp-for="StartTime">Start</label>
                 <div class="control">
                     <input asp-for="StartTime" class="input" value="@timeString" />
@@ -39,6 +33,12 @@
                 <label class="label" asp-for="EndTime">End</label>
                 <div class="control">
                     <input asp-for="EndTime" class="input" value="@timeString" />
+                </div>
+            </div>
+            <div class="field">
+                <label class="label" asp-for="Notes">Notes</label>
+                <div class="control">
+                    <input asp-for="Notes" class="input" />
                 </div>
             </div>
             <div class="field">

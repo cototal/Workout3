@@ -57,6 +57,10 @@ export function inputTag(opts) {
     if (null != opts.id) {
         output.push(` id="${opts.id}"`);
     }
+
+    if (null != opts.placeholder) {
+        output.push(` placeholder="${opts.placeholder}"`);
+    }
     output.push("/>");
     const divClasses = null == opts.divClasses ? ["control"] : ["control", ...opts.divClasses];
     return div(output.join(""), null, divClasses);
