@@ -1,26 +1,17 @@
 import "./styles.scss";
 import $ from "cash-dom";
+import React from "react";
+import ReactDOM from "react-dom";
 
-import { exerciseForm } from "./views/exerciseForm";
-import { batchForm } from "./views/batchForm";
+import { ExerciseList } from "./components/exerciseList";
 
-const $listContainer = $("#exercise-list");
-if ($listContainer.length) {
-    let exerciseCount = 0;
-    $("#add-exercise").on("click", evt => {
-        evt.preventDefault();
-        $listContainer.append(exerciseForm(exerciseCount));
-        ++exerciseCount;
-    });
-
-    $(document).on("click", ".add-batch", evt => {
-        evt.preventDefault();
-        const $exercise = $(evt.target);
-        const $batchContainer = $exercise.closest(".exercise").find(".batches");
-        const batchCount = $batchContainer.find(".batch").length;
-        const exerciseId = $exercise.data("exercise-id");
-        $batchContainer.append(batchForm(exerciseId, batchCount));
-    })
+const exerciseList = document.getElementById("exercise-list");
+if (null != exerciseList) {
+    console.log(exerciseList);
+    ReactDOM.render(
+        <ExerciseList />,
+        exerciseList
+    );
 }
 
 $(() => {
